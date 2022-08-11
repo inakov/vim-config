@@ -35,19 +35,15 @@ set splitbelow
 set splitright
 
 " Tab Shortcuts
-nnoremap th :tabfirst<CR>
-nnoremap tj :tabnext<CR>
-nnoremap tk :tabprev<CR>
-nnoremap tl :tablast<CR>
-nnoremap tn :tabnew<CR>
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprev<CR>
+nnoremap <leader>t :tabnew<CR>
 "nnoremap tc :CtrlSpaceTabLabel<CR>
 nnoremap td :tabclose<CR>
 
 " Buffer Shortcuts
-nnoremap bh :bfirst<CR>
-nnoremap bj :bnext<CR>
-nnoremap bk :bprevious<CR>
-nnoremap bl :blast<CR>
+nnoremap bn :bnext<CR>
+nnoremap bp :bprevious<CR>
 nnoremap bd :bdelete<CR>
 nnoremap bs :buffers<CR>
 
@@ -83,8 +79,8 @@ let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeChDirMode  = 2
 let NERDTreeShowHidden = 1
 let NERDTreeWinSize = 50
-noremap <leader>t :NERDTreeFind<CR>zz
-noremap <silent> <F4> :NERDTreeToggle<CR>
+noremap <space>t :NERDTreeFind<CR>zz
+noremap <silent><F4> :NERDTreeToggle<CR>
 
 " Autocommands
 " --------------------------
@@ -114,19 +110,18 @@ let g:airline_symbols.colnr = ' ℅:'
 syntax enable
 
 " Source Vim configuration file and install plugins
-" nnoremap <silent><space>1 :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
+nnoremap <silent><F5> :source ~/.config/nvim/init.vim \| :PlugInstall<CR>
 
 " Coc setup
 let g:coc_global_extensions = ['coc-tsserver', 'coc-emmet', 'coc-git', 'coc-lists', 'coc-snippets', 'coc-html', 'coc-tsserver', 'coc-jest', 'coc-eslint',
-            \ 'coc-css', 'coc-json', 'coc-prettier', 'coc-explorer']
+            \ 'coc-css', 'coc-json', 'coc-prettier', 'coc-explorer', 'coc-sql']
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=300
 
 " Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1):
       \ CheckBackspace() ? "\<Tab>" :
@@ -184,8 +179,8 @@ nmap <space>qf  <Plug>(coc-fix-current)
 nmap <leader>l  <Plug>(coc-codelens-action)
 
 " Remap for rename current word
-nmap <leader>r <Plug>(coc-rename)
-nmap <leader>R <Plug>(coc-refactor)
+nmap <leader>R <Plug>(coc-rename)
+nmap <leader>r <Plug>(coc-refactor)
 
 " Remap for format selected region
 xmap ==  <Plug>(coc-format-selected)
@@ -220,9 +215,9 @@ nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
 nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent><nowait> <space>s  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>o  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -236,8 +231,8 @@ let g:ctrlsf_auto_focus = {
     \ "at" : "start"
     \ }
 
-noremap ;w :CtrlSF<space>
-noremap <Space>w :CtrlSFOpen<CR><space>
+noremap <leader>w :CtrlSF<space>
+noremap <space>w :CtrlSFOpen<CR><space>
 
 " Git
 nnoremap gM :Gvsplit origin/master:%<cr>
@@ -252,13 +247,17 @@ noremap <leader>gp :G pull
 noremap <leader>gs :G push
 noremap <leader>gf :G fetch
 
+nmap <leader>h <Plug>(GitGutterPreviewHunk)
+nmap <leader>x <Plug>(GitGutterUndoHunk)
+nmap <leader>v <Plug>(GitGutterStageHunk)
 
 " Specify plugins
 " ----------------------------
 call plug#begin('~/.vim/plugged')
 
 " UI
-Plug 'trevordmiller/nova-vim'
+" Plug 'trevordmiller/nova-vim'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'            " Handy info
 " Plug 'ryanoasis/vim-webdevicons'
 " Plug 'junegunn/goyo.vim'
@@ -284,7 +283,8 @@ Plug 'jasonlong/vim-textobj-css'
 Plug 'editorconfig/editorconfig-vim'
 
 " Git
-Plug 'tpope/vim-fugitive'         " :Gblame
+Plug 'tpope/vim-fugitive'          " :Gblame
+Plug 'airblade/vim-gitgutter'
 
 " Language Support
 " 1. JavaScript
@@ -322,5 +322,5 @@ call plug#end()
 
 " Theme
 set termguicolors
-colorscheme nova
-
+colorscheme gruvbox
+set background=dark
